@@ -4,5 +4,5 @@
     <string name="edit_text_hint_city">Enter City Name</string>
     <string name="edit_text_hint_country">Enter Country Code (optional)</string>
     <string name="btn_get">Current By City</string>
-    <string name="btn_get_loc">Next 7 Days Location</string>
+    <string name="btn_get_loc">Next 7 Days By Gps</string>
 </resources>
