@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeatherApp2</string>
+    <string name="app_title">Weather Update</string>
+    <string name="edit_text_hint_city">Enter City Name</string>
+    <string name="edit_text_hint_country">Enter Country Code (optional)</string>
+    <string name="btn_get">GET</string>
+    <string name="btn_get_loc">GET LOCATION</string>
+</resources>
