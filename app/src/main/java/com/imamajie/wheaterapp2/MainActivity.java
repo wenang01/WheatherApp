@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                                                         JSONObject jsonResponse = new JSONObject(response);
                                                         String timezone = jsonResponse.getString("timezone");
                                                         JSONArray jsonArray = jsonResponse.getJSONArray("daily");
-                                                        JSONObject jsonObjectWeather = jsonResponse.getJSONObject("daily");
+//                                                        JSONObject jsonObjectWeather = jsonResponse.getJSONObject("daily");
 //                                                        JSONArray jsonWeather = jsonArray.getJSONArray(14);
                                                         tvResult.setTextColor(Color.rgb(68,134,199));
                                                         output += "Current weather of " + lat + " (" + lon + ")"
@@ -93,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
                                                         for (int i = 0; i < jsonArray.length(); i++){
                                                             JSONObject jsonObjectDaily = jsonArray.getJSONObject(i);
-                                                            JSONObject jsonWeather = jsonObjectWeather.getJSONObject("weather");
-                                                            String description = jsonWeather.getString("description");
+                                                            JSONArray jsonObjectWeather = jsonObjectDaily.getJSONArray("weather");
+                                                            JSONObject jsonObjectdescription = jsonObjectWeather.getJSONObject(0);
+                                                            String description = jsonObjectdescription.getString("description");
                                                             Long dt = jsonObjectDaily.getLong("dt");
                                                             long dv = Long.valueOf(dt)*1000;// its need to be in milisecond
                                                             Date df = new java.util.Date(dv);
