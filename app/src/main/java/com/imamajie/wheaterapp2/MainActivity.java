@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                                             Double lat = location.getLatitude();
                                             Double lon = location.getLongitude();
 
-                                            tempUrl = url + "onecall?lat=" + lat + "&lon=" + lon + "&cnt=7&appid=" + appid;
+                                            tempUrl = url + "onecall?lat=" + lat + "&lon=" + lon + "&cnt=7&lang=id&appid=" + appid;
                                             //textView.setText(lat +" , "+lon);
                                             Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                             StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl,
@@ -87,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
                                                         JSONArray jsonArray = jsonResponse.getJSONArray("daily");
 //                                                        JSONObject jsonObjectWeather = jsonResponse.getJSONObject("daily");
 //                                                        JSONArray jsonWeather = jsonArray.getJSONArray(14);
-                                                        tvResult.setTextColor(Color.rgb(68,134,199));
+                                                        tvResult.setTextColor(Color.rgb(59,59,59));
                                                         output += "Current weather of " + lat + " (" + lon + ")"
-                                                                + "\n Time Zone : "+ timezone + "\n";
+                                                                + "\nTime Zone : "+ timezone + "\n";
 
                                                         for (int i = 0; i < jsonArray.length(); i++){
                                                             JSONObject jsonObjectDaily = jsonArray.getJSONObject(i);
@@ -162,13 +162,14 @@ public class MainActivity extends AppCompatActivity {
         String tempUrl = "";
         String city = etCity.getText().toString().trim();
         String country = etCountry.getText().toString().trim();
+
         if (city.equals("")){
             tvResult.setText("City field can not be empty!");
         }else{
             if(!country.equals("")){
-                tempUrl = url + "weather" + "?q=" + city + "," + country + "&appid=" + appid;
+                tempUrl = url + "weather" + "?q=" + city + "," + country + "&lang=id&appid=" + appid;
             }else{
-                tempUrl = url + "weather" + "?q=" + city + "&appid=" + appid;
+                tempUrl = url + "weather" + "?q=" + city + "&lang=id&appid=" + appid;
             }
             StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>(){
                     @Override
@@ -192,15 +193,15 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObjectSys = jsonResponse.getJSONObject("sys");
                             String countryName = jsonObjectSys.getString("country");
                             String cityName = jsonResponse.getString("name");
-                            tvResult.setTextColor(Color.rgb(68,134,199));
-                            output += "Current weather of " + cityName + " (" + countryName + ")"
-                                    + "\n Temp: " + df.format(temp) + " C"
-                                    + "\n Feels Like: " + df.format(feelsLike) + " C"
-                                    + "\n Humidity: " + humidity + "%"
-                                    + "\n Description: " + description
-                                    + "\n Wind Speed: " + wind + "m/s (meter per second)"
-                                    + "\n Cloudiness: " + clouds + "%"
-                                    + "\n Pressure: " + pressure + " hPa";
+                            tvResult.setTextColor(Color.rgb(59,59,59));
+                            output += "Current weather of " + cityName + " (" + countryName + ")\n"
+                                    + "\nTemp: " + df.format(temp) + " C"
+                                    + "\nFeels Like: " + df.format(feelsLike) + " C"
+                                    + "\nHumidity: " + humidity + "%"
+                                    + "\nDescription: " + description
+                                    + "\nWind Speed: " + wind + "m/s (meter per second)"
+                                    + "\nCloudiness: " + clouds + "%"
+                                    + "\nPressure: " + pressure + " hPa";
                             tvResult.setText(output);
 
                         }catch (JSONException e) {
@@ -216,9 +217,5 @@ public class MainActivity extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             requestQueue.add(stringRequest);
         }
-    }
-
-    public void getWeatherByLocation(View view){
-
     }
 }
